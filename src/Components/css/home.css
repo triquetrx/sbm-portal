@@ -1,0 +1,55 @@
+.card {
+  margin: 0.3rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.4);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 10px;
+  transition: ease-in 0.2s;
+}
+
+nav {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.design-landing-page {
+  position: fixed;
+  top: -21rem;
+  right: -15rem;
+  width: 25rem;
+  height: 25rem;
+
+  border-radius: 50%;
+  background-color: #004fff;
+}
+
+#top-alert {
+  width: 100vw;
+  background-color: #201e1f;
+  color: #ece9ea;
+  z-index: 99;
+}
+
+.logout {
+  position: fixed;
+  width: 100vw;
+  left: 0.7rem;
+  bottom: 1rem;
+}
+
+.active {
+  color: #b80c09;
+  padding-left: 0.7rem !important;
+  text-decoration: none;
+  border-bottom: 0.3rem solid #b80c09;
+}
+
+.design {
+  position: fixed;
+  top: -13rem;
+  left: -16rem;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 50%;
+}
