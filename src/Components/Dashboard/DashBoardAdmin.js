@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, Container, Row } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import $ from "jquery";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import News from "./News";
 
 export default function DashBoardAdmin(props) {
@@ -133,7 +133,11 @@ export default function DashBoardAdmin(props) {
             <h2>
               {greeting},{" "}
               <span className="text-danger">
-                {AESDecrypt(cookies.get("name"), "test")}
+                {cookies.get("token") ? (
+                  AESDecrypt(cookies.get("name"), "test")
+                ) : (
+                  <Navigate to="/login" />
+                )}
               </span>
             </h2>
           </div>

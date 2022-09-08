@@ -65,6 +65,7 @@ class MyProducts extends Component {
         end: this.state.end - 5,
       });
     };
+
     let showMore = () => {
       this.setState({
         start: this.state.start + 5,
@@ -74,14 +75,12 @@ class MyProducts extends Component {
 
     $(document).ready(function () {
       $(".card").find(".card-body p").hide();
-      $(".card").hover(
+      $(".card .card-title").hover(
         function () {
-          $(this).css("margin-bottom", "2rem");
-          $(this).find(".card-body p").show(200);
+          $(this).parent().find(".card-text").show(200);
         },
         function () {
-          $(this).css("margin-bottom", "0rem");
-          $(this).find(".card-body p").hide(200);
+          $(this).parent().find(".card-text").hide(200);
         }
       );
     });
@@ -89,6 +88,7 @@ class MyProducts extends Component {
     let handleDeleteClose = () => {
       this.setState({ showDeleteModal: false, isAlert: false });
     };
+
     let handleUpdateClose = () => {
       this.setState({ showUpdateModal: false, isAlert: false });
     };
@@ -291,8 +291,12 @@ class MyProducts extends Component {
                         />
                         <Card.Body>
                           <Card.Title className="text-secondary">
-                            {item.make}
-                            <br />₹ {item.cost}
+                            <Row>
+                              <Col>{item.make}</Col>
+                              <div className="col-auto text-primary">
+                                ₹ {item.cost}
+                              </div>
+                            </Row>
                           </Card.Title>
                           <Card.Text>{item.name}</Card.Text>
                         </Card.Body>

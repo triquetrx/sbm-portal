@@ -75,6 +75,7 @@ export default function TopBarAdmin(props) {
 
   return (
     <>
+      {/* Logout page */}
       <Modal
         show={isLogout}
         onHide={handleClose}
@@ -96,6 +97,7 @@ export default function TopBarAdmin(props) {
           </Link>
         </Modal.Footer>
       </Modal>
+
       <div className="py-2" id="top-alert">
         <Container className="d-flex justify-content-center">
           <h6>Welcome Back, Note the session is only valid for 30 minutes</h6>

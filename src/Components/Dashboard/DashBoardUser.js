@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Card, Container, Row } from "react-bootstrap";
 import Cookies from "universal-cookie";
 import $ from "jquery";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import News from "./News";
 
 export default function DashBoardUser(props) {
@@ -81,7 +81,7 @@ export default function DashBoardUser(props) {
       description: "View the product you need the service for",
       url: "/products",
       button: "Explore",
-      icon: "pl-1 fa-solid fa-cart-shopping",
+      icon: "pl-2 fa-solid fa-cart-shopping",
     },
     {
       name: "Add",
@@ -89,14 +89,14 @@ export default function DashBoardUser(props) {
         "Add new product for which the services will be provided by you",
       url: "/add",
       button: "Add Product",
-      icon: "pl-1 fa-solid fa-plus-circle",
+      icon: "pl-2 fa-solid fa-plus-circle",
     },
     {
       name: "Services",
       description: "Get the service requests for your products",
       url: "/services",
       button: "Lets see",
-      icon: "pl-1 fa-regular fa-calendar-days",
+      icon: "pl-2 fa-solid fa-wrench",
     },
     {
       name: "Track Request",
@@ -104,14 +104,14 @@ export default function DashBoardUser(props) {
         "Track of your own service requests with the help of request id",
       url: "/services",
       button: "Track",
-      icon: "pl-1 fa-solid fa-search",
+      icon: "pl-2 fa-brands fa-searchengin",
     },
     {
       name: "About me",
       description: "Change your password or any other information you want",
       url: "/me",
-      button: "User Data",
-      icon: "pl-1 fa-solid fa-user",
+      button: "My Data",
+      icon: "pl-2 fa-solid fa-circle-user",
     },
   ];
 
@@ -134,7 +134,11 @@ export default function DashBoardUser(props) {
             <h2>
               {greeting},{" "}
               <span className="text-danger">
-                {AESDecrypt(cookies.get("name"), "test")}
+                {cookies.get("token") ? (
+                  AESDecrypt(cookies.get("name"), "test")
+                ) : (
+                  <Navigate to="/login" />
+                )}
               </span>
             </h2>
           </div>

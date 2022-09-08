@@ -199,7 +199,7 @@ class MyProductRequest extends Component {
                 <td>{this.state.user.mobile}</td>
               </tr>
               <tr>
-                <td colspan="2">
+                <td colSpan="2">
                   <button
                     className="btn btn-block btn-outline-primary"
                     onClick={fetchProductDetails}
@@ -494,7 +494,7 @@ class MyProductRequest extends Component {
                             </Card.Subtitle>
                             <Card.Text>{item.description}</Card.Text>
                           </Col>
-                          <div className="col-3 col-md-2">
+                          <div className="col-2 col-md-1">
                             {item.status === "Pending" ? (
                               <button
                                 className="btn btn-outline-danger ml-md-1"

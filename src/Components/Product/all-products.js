@@ -25,7 +25,7 @@ class AllProducts extends Component {
       showUpdateModal: false,
       productId: "",
       start: 0,
-      end: 5,
+      end: 4,
       isAlert: false,
       alertType: "",
       alertMessage: "",
@@ -65,9 +65,11 @@ class AllProducts extends Component {
       )
       .then((res) => {
         console.log(res);
-        this.setState({
-          result: res.body.payload,
-        });
+        if (res.body.payload !== null) {
+          this.setState({
+            result: res.body.payload,
+          });
+        }
       })
       .catch((err) => {
         console.error(err);
@@ -77,27 +79,26 @@ class AllProducts extends Component {
   render() {
     let showLess = () => {
       this.setState({
-        start: this.state.start - 5,
-        end: this.state.end - 5,
+        start: this.state.start - 4,
+        end: this.state.end - 4,
       });
     };
+
     let showMore = () => {
       this.setState({
-        start: this.state.start + 5,
-        end: this.state.end + 5,
+        start: this.state.start + 4,
+        end: this.state.end + 4,
       });
     };
 
     $(document).ready(function () {
       $(".card").find(".card-body p").hide();
-      $(".card").hover(
+      $(".card .card-title").hover(
         function () {
-          $(this).css("margin-bottom", "2rem");
-          $(this).find(".card-body p").show(200);
+          $(this).parent().find(".card-text").show(200);
         },
         function () {
-          $(this).css("margin-bottom", "0rem");
-          $(this).find(".card-body p").hide(200);
+          $(this).parent().find(".card-text").hide(200);
         }
       );
     });
@@ -105,6 +106,7 @@ class AllProducts extends Component {
     let handleServiceRequestClose = () => {
       this.setState({ showServiceRequestModal: false, isAlert: false });
     };
+
     let handleUpdateClose = () => {
       this.setState({ showUpdateModal: false, isAlert: false });
     };
@@ -407,8 +409,12 @@ class AllProducts extends Component {
                         />
                         <Card.Body>
                           <Card.Title className="text-secondary">
-                            {item.make}
-                            <br />₹ {item.cost}
+                            <Row>
+                              <Col>{item.make}</Col>
+                              <div className="col-auto text-primary">
+                                ₹ {item.cost}
+                              </div>
+                            </Row>
                           </Card.Title>
                           <Card.Text>{item.name}</Card.Text>
                         </Card.Body>
@@ -469,11 +475,11 @@ class AllProducts extends Component {
                     </div>
                   ))}
               </Row>
-              {this.state.result.length > this.state.end ? (
+              {this.state.result.length > 4 ? (
                 <div className="d-flex justify-content-end my-4 text-end">
-                  {this.state.start > 5 ? (
+                  {this.state.start > 3 ? (
                     <button
-                      className="text-danger mx-1"
+                      className="btn text-danger mx-1"
                       style={{ border: "none", backgroundColor: "transparent" }}
                       onClick={showLess}
                     >
@@ -482,13 +488,17 @@ class AllProducts extends Component {
                   ) : (
                     <></>
                   )}
-                  <button
-                    className="text-primary mx-1"
-                    style={{ border: "none", backgroundColor: "transparent" }}
-                    onClick={showMore}
-                  >
-                    More
-                  </button>
+                  {this.state.result.length > this.state.end ? (
+                    <button
+                      className="btn text-primary mx-1"
+                      style={{ border: "none", backgroundColor: "transparent" }}
+                      onClick={showMore}
+                    >
+                      More
+                    </button>
+                  ) : (
+                    <></>
+                  )}
                 </div>
               ) : (
                 <></>
