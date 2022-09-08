@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Alert, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Container, Form, Row } from "react-bootstrap";
 import Bottom from "../LandingPage/Bottom";
 import TopBar from "../TopBar/TopBar";
 import AllProducts from "./all-products";
@@ -143,7 +143,7 @@ class Products extends Component {
             </div>
           </Row>
           <hr />
-          {this.state.showSearchResult && this.state.searchFor != "" ? (
+          {this.state.showSearchResult && this.state.searchFor !== "" ? (
             <SignleProduct
               data={this.state.searchResult}
               currentUser={this.state.currentUser}

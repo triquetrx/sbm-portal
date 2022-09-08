@@ -124,7 +124,7 @@ export default function DashBoardUser(props) {
     } else if (hrs >= 17 && hrs <= 24) {
       setGreetings("Good Evening");
     }
-  });
+  }, []);
 
   return (
     <>

@@ -55,7 +55,6 @@ export default function SignleProduct(props) {
         description: description,
       })
       .then((res) => {
-        console.log(res);
         setAlert(true);
         setAlertType("success");
         setAlertMessage(res.body.message);
@@ -97,7 +96,6 @@ export default function SignleProduct(props) {
         `Bearer ${AESDecrypt(cookies.get("token"), "test")}`
       )
       .then((res) => {
-        console.log(res.body);
         setAlert(true);
         setAlertType("success");
         setAlertMessage(res.body.message);
