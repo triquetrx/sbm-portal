@@ -311,7 +311,8 @@ export default function SignleProduct(props) {
             </Col>
             <div className="col-md-4 mt-md-0 mt-2">
               <Row>
-                {props.currentUser === props.data.createdBy ? (
+                {props.currentUser === props.data.createdBy ||
+                props.currentUserRole === "ROLE_ADMIN" ? (
                   <>
                     <button
                       className="col btn btn-outline-primary m-1"

@@ -108,7 +108,7 @@ class Products extends Component {
                   <input
                     type="search"
                     className="form-control rounded"
-                    placeholder="Search request by user id"
+                    placeholder="Search product by id"
                     aria-label="Search"
                     aria-describedby="search-addon"
                     onChange={(e) => {
@@ -147,6 +147,7 @@ class Products extends Component {
             <SignleProduct
               data={this.state.searchResult}
               currentUser={this.state.currentUser}
+              currentUserRole={this.state.currentUserRole}
             />
           ) : (
             <>
