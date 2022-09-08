@@ -47,18 +47,20 @@ class ServiceAdmin extends Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("http://localhost:8001/validate")
-      .set(
-        "Authorization",
-        `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
-      )
-      .then((res) => {
-        this.setState({
-          currentUser: res.body.email,
-        });
-      })
-      .catch(console.error);
+    if (this.state.cookies.get("token")) {
+      superagent
+        .get("http://localhost:8001/validate")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          this.setState({
+            currentUser: res.body.email,
+          });
+        })
+        .catch(console.error);
+    }
   }
 
   render() {
@@ -370,7 +372,7 @@ class ServiceAdmin extends Component {
             <Col>
               <h2>Services</h2>
             </Col>
-            <div className="col-3">
+            <div className="col-md-3">
               <Form onSubmit={searchByUser}>
                 <div className="input-group rounded">
                   <input

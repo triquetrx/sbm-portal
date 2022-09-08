@@ -1,6 +1,15 @@
 import { AESDecrypt } from "cookie-cryptr";
 import { Component } from "react";
-import { Button, Card, Col, Form, Modal, Row, Table } from "react-bootstrap";
+import {
+  Button,
+  Card,
+  Col,
+  Container,
+  Form,
+  Modal,
+  Row,
+  Table,
+} from "react-bootstrap";
 import superagent from "superagent";
 import Cookies from "universal-cookie";
 
@@ -18,19 +27,21 @@ class AllReports extends Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("http://localhost:8004/servicereq/report/")
-      .set(
-        "Authorization",
-        `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          result: res.body.payload,
-        });
-      })
-      .catch(console.error);
+    if (this.state.cookies.get("token")) {
+      superagent
+        .get("http://localhost:8004/servicereq/report/")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            result: res.body.payload,
+          });
+        })
+        .catch(console.error);
+    }
   }
 
   render() {
@@ -61,7 +72,7 @@ class AllReports extends Component {
           <Col>
             <h3 className="mb-3">All Reports</h3>
           </Col>
-          <div className="col-3">
+          <div className="col-md-3">
             <Form onSubmit={searchByUser}>
               <div className="input-group rounded">
                 <input
@@ -197,7 +208,9 @@ class AllReports extends Component {
                 </Card>
               ))
             ) : (
-              <h4>No Data Found</h4>
+              <Container fluid>
+                <h6>No Data Found</h6>
+              </Container>
             )}
           </>
         )}

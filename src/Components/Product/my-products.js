@@ -37,21 +37,25 @@ class MyProducts extends Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("http://localhost:8003/product/my-products")
-      .set(
-        "Authorization",
-        `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          result: res.body.payload,
+    if (this.state.cookies.get("token")) {
+      superagent
+        .get("http://localhost:8003/product/my-products")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          console.log(res);
+          if (res.body.message !== "NO_DATA_FOUND") {
+            this.setState({
+              result: res.body.payload,
+            });
+          }
+        })
+        .catch((err) => {
+          console.error(err);
         });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    }
   }
 
   render() {
@@ -83,10 +87,10 @@ class MyProducts extends Component {
     });
 
     let handleDeleteClose = () => {
-      this.setState({ showDeleteModal: false });
+      this.setState({ showDeleteModal: false, isAlert: false });
     };
     let handleUpdateClose = () => {
-      this.setState({ showUpdateModal: false });
+      this.setState({ showUpdateModal: false, isAlert: false });
     };
 
     let deleteItem = async () => {
@@ -102,7 +106,6 @@ class MyProducts extends Component {
             isAlert: true,
             alertType: "success",
             alertMessage: res.body.message,
-            showDeleteModal: false,
           });
         })
         .catch(console.error);
@@ -358,7 +361,7 @@ class MyProducts extends Component {
               )}
             </>
           ) : (
-            <h3>No uploads yet</h3>
+            <h5>No uploads as of yet</h5>
           )}
         </Container>
       </>

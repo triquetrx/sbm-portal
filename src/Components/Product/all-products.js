@@ -103,10 +103,10 @@ class AllProducts extends Component {
     });
 
     let handleServiceRequestClose = () => {
-      this.setState({ showServiceRequestModal: false });
+      this.setState({ showServiceRequestModal: false, isAlert: false });
     };
     let handleUpdateClose = () => {
-      this.setState({ showUpdateModal: false });
+      this.setState({ showUpdateModal: false, isAlert: false });
     };
 
     let serviceRequest = async (e) => {
@@ -174,14 +174,13 @@ class AllProducts extends Component {
             isAlert: true,
             alertType: "success",
             alertMessage: res.body.message,
-            showDeleteModal: false,
           });
         })
         .catch(console.error);
     };
 
     let handleDeleteClose = () => {
-      this.setState({ showDeleteModal: false });
+      this.setState({ showDeleteModal: false, isAlert: false });
     };
 
     return (
@@ -344,10 +343,18 @@ class AllProducts extends Component {
                 </Form.Group>
               </Modal.Body>
               <Modal.Footer>
-                <Button variant="danger" onClick={handleServiceRequestClose}>
+                <Button
+                  variant="danger"
+                  type="reset"
+                  onClick={handleServiceRequestClose}
+                >
                   Close
                 </Button>
-                <Button variant="outline-primary" onClick={serviceRequest}>
+                <Button
+                  variant="outline-primary"
+                  type="submit"
+                  onClick={serviceRequest}
+                >
                   Raise Request
                 </Button>
               </Modal.Footer>

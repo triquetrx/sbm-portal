@@ -20,6 +20,7 @@ class MyProductRequest extends Component {
       cookies: new Cookies(),
       result: {},
       showMore: false,
+      userEmail: "",
       user: {},
       productId: "",
       productDetails: {},
@@ -43,19 +44,36 @@ class MyProductRequest extends Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("http://localhost:8004/servicereq")
-      .set(
-        "Authorization",
-        `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          result: res.body.payload,
+    if (this.state.cookies.get("token")) {
+      superagent
+        .get("http://localhost:8001/validate")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            userEmail: res.body.email,
+          });
+        })
+        .catch((err) => {
+          console.error(err.response.body);
         });
-      })
-      .catch(console.error);
+      superagent
+        .get("http://localhost:8004/servicereq")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            result: res.body.payload,
+          });
+        })
+        .catch(console.error);
+    }
   }
 
   render() {
@@ -64,6 +82,8 @@ class MyProductRequest extends Component {
         showMore: false,
         showGenerateReport: false,
         openReport: false,
+        productDetails: {},
+        detailsReady: false,
       });
     };
 
@@ -218,9 +238,13 @@ class MyProductRequest extends Component {
             <Button variant="danger" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="outline-primary" onClick={createReport}>
-              Create Report
-            </Button>
+            {this.state.productDetails.createdBy === this.state.userEmail ? (
+              <Button variant="outline-primary" onClick={createReport}>
+                Create Report
+              </Button>
+            ) : (
+              <></>
+            )}
           </Modal.Footer>
         </Modal>
 
@@ -412,7 +436,7 @@ class MyProductRequest extends Component {
               </div>
             </Row>
             {this.state.result
-              .slice(this.state.start, this.state.end)
+              // .slice(this.state.start, this.state.end)
               .map((item, key) =>
                 this.state.isFilterStatus ? (
                   item.status === "Pending" ? (

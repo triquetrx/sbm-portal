@@ -35,26 +35,29 @@ class MyRequest extends Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("http://localhost:8004/servicereq/my-requests")
-      .set(
-        "Authorization",
-        `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          result: res.body.payload,
-        });
-      })
-      .catch(console.error);
+    if (this.state.cookies.get("token")) {
+      superagent
+        .get("http://localhost:8004/servicereq/my-requests")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            result: res.body.payload,
+          });
+        })
+        .catch(console.error);
+    }
   }
 
   render() {
-    const handleClose = () => this.setState({ openReport: false });
+    const handleClose = () =>
+      this.setState({ openReport: false, isAlert: false });
 
     let handleServiceRequestClose = () => {
-      this.setState({ showServiceRequestModal: false });
+      this.setState({ showServiceRequestModal: false, isAlert: false });
     };
 
     let serviceRequest = async (e) => {
@@ -83,7 +86,7 @@ class MyRequest extends Component {
     };
 
     let handleDeleteClose = () => {
-      this.setState({ showDelete: false });
+      this.setState({ showDelete: false, isAlert: false });
     };
 
     let deleteItem = async () => {
@@ -386,7 +389,7 @@ class MyRequest extends Component {
                       {item.status === "Pending" ? (
                         <></>
                       ) : (
-                        <div className="col-1">
+                        <div className="col-md-1 mt-2 mt-md-0">
                           <button
                             className="btn btn-block btn-outline-primary"
                             onClick={() => {

@@ -17,21 +17,23 @@ class TopBar extends Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("http://localhost:8001/validate")
-      .set(
-        "Authorization",
-        `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
-      )
-      .then((res) => {
-        console.log(res);
-        this.setState({
-          role: res.body.userRole,
+    if (this.state.cookies.get("token")) {
+      superagent
+        .get("http://localhost:8001/validate")
+        .set(
+          "Authorization",
+          `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
+        )
+        .then((res) => {
+          console.log(res);
+          this.setState({
+            role: res.body.userRole,
+          });
+        })
+        .catch((err) => {
+          console.error(err.response.body);
         });
-      })
-      .catch((err) => {
-        console.error(err.response.body);
-      });
+    }
   }
 
   render() {
