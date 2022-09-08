@@ -8,34 +8,36 @@ import { AESDecrypt } from "cookie-cryptr";
 export default function TopBarUser(props) {
   const [isLogout, setLogout] = useState(false);
   const [isDarkMode, setDarkMode] = useState(false);
-  const [currentPage, setCurrentPage] = useState("");
   const cookies = new Cookies();
 
   $(document).ready(function () {
-    setCurrentPage("");
     if (cookies.get("mode") === "dark") {
       setDarkMode(true);
-      $(".App").css("background-color", "#201E1F");
-      $(".dropdown-menu").css("background-color", "#040404");
-      $(".App .text-secondary")
-        .addClass("text-light")
-        .removeClass("text-secondary");
-      $(".App .bg-light").addClass("bg-dark").removeClass("bg-light");
-      $(".App .text-danger").addClass("text-white").removeClass("text-danger");
-      $(".App .btn-danger").addClass("btn-warning").removeClass("btn-danger");
-      $(".App .bg-danger").addClass("bg-warning").removeClass("bg-danger");
-      $(".App .btn-outline-danger")
-        .addClass("btn-outline-warning")
-        .removeClass("btn-outline-danger");
-      $(".App nav")
-        .css("background", "rgba( 32, 30, 31, 0.5 )")
-        .css("border", "1px solid rgba( 255, 255, 255, 0.18 )");
-      $("#basic-nav-dropdown").css("color", "#fff");
-      $("#more-options").css("color", "#fff");
-      $(".features-landing").css("background-color", "#000");
-      $(".card")
-        .css("background", "rgba( 32, 30, 31, 0.2 )")
-        .css("border", "1px solid rgba( 255, 255, 255, 0.18 )");
+      if (isDarkMode) {
+        $(".App").css("background-color", "#201E1F");
+        $(".dropdown-menu").css("background-color", "#040404");
+        $(".App .text-secondary")
+          .addClass("text-light")
+          .removeClass("text-secondary");
+        $(".App .bg-light").addClass("bg-dark").removeClass("bg-light");
+        $(".App .text-danger")
+          .addClass("text-white")
+          .removeClass("text-danger");
+        $(".App .btn-danger").addClass("btn-warning").removeClass("btn-danger");
+        $(".App .bg-danger").addClass("bg-warning").removeClass("bg-danger");
+        $(".App .btn-outline-danger")
+          .addClass("btn-outline-warning")
+          .removeClass("btn-outline-danger");
+        $(".App nav")
+          .css("background", "rgba( 32, 30, 31, 0.5 )")
+          .css("border", "1px solid rgba( 255, 255, 255, 0.18 )");
+        $("#basic-nav-dropdown").css("color", "#fff");
+        $("#more-options").css("color", "#fff");
+        $(".features-landing").css("background-color", "#000");
+        $(".card")
+          .css("background", "rgba( 32, 30, 31, 0.2 )")
+          .css("border", "1px solid rgba( 255, 255, 255, 0.18 )");
+      }
     } else {
       setDarkMode(false);
       $(".App").css("background-color", "#F0EDEE");
@@ -69,7 +71,6 @@ export default function TopBarUser(props) {
 
   let show = () => {
     setLogout(true);
-    setCurrentPage(window.location.href);
   };
   let handleClose = () => setLogout(false);
 
