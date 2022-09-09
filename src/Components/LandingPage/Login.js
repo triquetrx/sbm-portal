@@ -6,7 +6,6 @@ import TopBarLandingPage from "./TopBarLandingPage";
 import superagent from "superagent";
 import Cookies from "universal-cookie";
 import { AESEncrypt } from "cookie-cryptr";
-import Dashboard from "../Dashboard/Dashboard";
 
 export default function Login(props) {
   const [userData, setUserData] = useState({});
