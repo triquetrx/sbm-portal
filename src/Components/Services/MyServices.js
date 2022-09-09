@@ -60,7 +60,7 @@ class MyServices extends Component {
             )}
             <Form onSubmit={next}>
               <div className="form-group">
-                <label for="option">Please select an option</label>
+                <label htmlFor="option">Please select an option</label>
                 <select
                   className="form-control"
                   id="option"

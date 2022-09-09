@@ -15,6 +15,7 @@ import Bottom from "../LandingPage/Bottom";
 import TopBar from "../TopBar/TopBar";
 import superagent from "superagent";
 import { Navigate } from "react-router-dom";
+import LoadingPage from "../LoadingPage";
 
 class AboutMe extends Component {
   constructor(props) {
@@ -29,11 +30,13 @@ class AboutMe extends Component {
       isAlert: false,
       alertType: "",
       alertMessage: "",
+      isLoader: false,
     };
   }
 
   componentDidMount() {
     if (this.state.cookies.get("token")) {
+      this.setState({ isLoader: true });
       superagent
         .get("http://localhost:8002/user/me")
         .set(
@@ -47,6 +50,7 @@ class AboutMe extends Component {
             showUpdate: false,
             name: res.body.payload.name,
             mobile: res.body.payload.mobile,
+            isLoader: false,
           });
         })
         .catch((err) => {
@@ -70,6 +74,7 @@ class AboutMe extends Component {
 
     let update = async (e) => {
       e.preventDefault();
+      this.setState({ isLoader: true });
       superagent
         .put("http://localhost:8002/user")
         .set(
@@ -86,6 +91,7 @@ class AboutMe extends Component {
             isAlert: true,
             alertType: "success",
             alertMessage: res.body.message,
+            isLoader: false,
           });
         })
         .catch((err) => {
@@ -93,12 +99,14 @@ class AboutMe extends Component {
             isAlert: true,
             alertType: "success",
             alertMessage: err.response.message,
+            isLoader: false,
           });
         });
     };
 
     let changePassword = async (e) => {
       e.preventDefault();
+      this.setState({ isLoader: true });
       superagent
         .put("http://localhost:8001/change-password")
         .set(
@@ -114,6 +122,7 @@ class AboutMe extends Component {
             isAlert: true,
             alertType: "success",
             alertMessage: res.text,
+            isLoader: false,
           });
         })
         .catch((err) => {
@@ -122,6 +131,7 @@ class AboutMe extends Component {
             isAlert: true,
             alertType: "danger",
             alertMessage: err.response.text,
+            isLoader: false,
           });
         });
     };
@@ -129,6 +139,7 @@ class AboutMe extends Component {
       <>
         {this.state.cookies.get("token") ? (
           <>
+            {this.state.isLoader ? <LoadingPage /> : <></>}
             {/* Change Password Modal */}
             <Modal
               show={this.state.showChangePassword}

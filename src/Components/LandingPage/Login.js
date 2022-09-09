@@ -6,16 +6,19 @@ import TopBarLandingPage from "./TopBarLandingPage";
 import superagent from "superagent";
 import Cookies from "universal-cookie";
 import { AESEncrypt } from "cookie-cryptr";
+import LoadingPage from "../LoadingPage";
 
 export default function Login(props) {
   const [userData, setUserData] = useState({});
   const [isAlert, setAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
+  const [isLoader, setLoader] = useState(false);
   const cookies = new Cookies();
 
   let loginUser = async (e) => {
     e.preventDefault();
+    setLoader(true);
     superagent
       .post("http://localhost:8002/user/login")
       .send({
@@ -35,6 +38,7 @@ export default function Login(props) {
           secure: true,
           sameSite: true,
         });
+        setLoader(false);
         window.location.reload();
       })
       .catch((err) => {
@@ -42,6 +46,7 @@ export default function Login(props) {
         setAlert(true);
         setAlertMessage(err.response.body.message);
         setAlertType("danger");
+        setLoader(false);
       });
   };
 
@@ -56,6 +61,7 @@ export default function Login(props) {
         <Navigate to="/dashboard" />
       ) : (
         <>
+          {isLoader ? <LoadingPage /> : <></>}
           <TopBarLandingPage />
           <Container className="mt-5 pt-2 mb-3 text-secondary">
             <Row>
