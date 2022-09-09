@@ -45,7 +45,6 @@ class MyProducts extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res);
           if (res.body.message !== "NO_DATA_FOUND") {
             this.setState({
               result: res.body.payload,
@@ -101,7 +100,6 @@ class MyProducts extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res.body);
           this.setState({
             isAlert: true,
             alertType: "success",
@@ -127,7 +125,6 @@ class MyProducts extends Component {
           productImageUrl: this.state.productImageUrl,
         })
         .then((res) => {
-          console.log(res);
           this.setState({
             isAlert: true,
             alertType: "success",

@@ -72,6 +72,7 @@ export default function TopBarAdmin(props) {
   let show = () => {
     setLogout(true);
   };
+
   let handleClose = () => setLogout(false);
 
   return (

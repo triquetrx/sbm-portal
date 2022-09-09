@@ -64,7 +64,6 @@ class AllProducts extends Component {
         `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
       )
       .then((res) => {
-        console.log(res);
         if (res.body.payload !== null) {
           this.setState({
             result: res.body.payload,
@@ -125,7 +124,6 @@ class AllProducts extends Component {
           description: this.state.description,
         })
         .then((res) => {
-          console.log(res);
           this.setState({
             isAlert: true,
             alertType: "success",
@@ -152,7 +150,6 @@ class AllProducts extends Component {
           productImageUrl: this.state.productImageUrl,
         })
         .then((res) => {
-          console.log(res);
           this.setState({
             isAlert: true,
             alertType: "success",
@@ -171,7 +168,6 @@ class AllProducts extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res.body);
           this.setState({
             isAlert: true,
             alertType: "success",

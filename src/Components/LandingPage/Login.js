@@ -24,7 +24,6 @@ export default function Login(props) {
         password: userData.password,
       })
       .then((res) => {
-        console.log(res);
         cookies.set("token", AESEncrypt(res.body.payload.token, "test"), {
           path: "/",
           expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
@@ -40,7 +39,7 @@ export default function Login(props) {
         window.location.reload();
       })
       .catch((err) => {
-        console.error(err.response);
+        console.error(err);
         setAlert(true);
         setAlertMessage(err.response.body.message);
         setAlertType("danger");

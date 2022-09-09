@@ -65,7 +65,6 @@ export default function SignleProduct(props) {
 
   let updateItem = async (e) => {
     e.preventDefault();
-    console.log(productDetails);
     superagent
       .put(`http://localhost:8003/product/${productDetails.id}`)
       .set(

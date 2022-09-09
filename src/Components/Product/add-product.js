@@ -29,7 +29,6 @@ export default function AddProduct(props) {
         productImageUrl: userData.productImageUrl,
       })
       .then((res) => {
-        console.log(res);
         setAlert(true);
         setAlertMessage(res.body.message);
         setAlertType("success");

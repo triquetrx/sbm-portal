@@ -26,7 +26,6 @@ class Dashboard extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res);
           this.setState({
             role: res.body.userRole,
           });

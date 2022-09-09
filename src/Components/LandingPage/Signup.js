@@ -13,7 +13,6 @@ export default function Signup(second) {
 
   let registerUser = async (e) => {
     e.preventDefault();
-    console.log(userData);
     if (userData.gender === "default" || userData.gender === "") {
       setAlert("true");
       setAlertType("danger");
@@ -41,7 +40,7 @@ export default function Signup(second) {
           document.getElementById("gender").value = "default";
         })
         .catch((err) => {
-          console.error(err.response);
+          console.error(err);
           setAlert("true");
           setAlertType("danger");
           setAlertMessage(err.response.body.message);
@@ -131,8 +130,8 @@ export default function Signup(second) {
                   </Form.Group>
                 </div>
                 <div className="col-md">
-                  <div class="form-group">
-                    <label for="gender">Gender</label>
+                  <div className="form-group">
+                    <label htmlFor="gender">Gender</label>
                     <select
                       className="form-control"
                       onChange={(e) =>

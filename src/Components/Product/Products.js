@@ -66,7 +66,6 @@ class Products extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res);
           this.setState({
             isAlert: false,
             searchResult: res.body.payload,

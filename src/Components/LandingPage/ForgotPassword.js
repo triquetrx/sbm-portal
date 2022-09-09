@@ -24,11 +24,10 @@ export default function ForgotPassword(props) {
         .then((res) => {
           setAlert(true);
           setAlertType("success");
-          console.log(res);
           setAlertMessage(res.text);
         })
         .catch((err) => {
-          console.log(err.response);
+          console.error(err);
           setAlert(true);
           setAlertType("danger");
           setAlertMessage(err.response.text);

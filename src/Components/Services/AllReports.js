@@ -35,7 +35,6 @@ class AllReports extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res);
           this.setState({
             result: res.body.payload,
           });
@@ -58,7 +57,6 @@ class AllReports extends Component {
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
         )
         .then((res) => {
-          console.log(res);
           this.setState({
             searchByUserData: res.body.payload,
           });
