@@ -49,7 +49,9 @@ class ServiceAdmin extends Component {
   componentDidMount() {
     if (this.state.cookies.get("token")) {
       superagent
-        .get("http://localhost:8001/validate")
+        .get(
+          " http://sbmauthapp-env.eba-9pddynji.us-west-2.elasticbeanstalk.com/validate"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -67,7 +69,9 @@ class ServiceAdmin extends Component {
     let searchByUser = (e) => {
       e.preventDefault();
       superagent
-        .get(`http://localhost:8004/servicereq/${this.state.searchFor}`)
+        .get(
+          `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/${this.state.searchFor}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -131,7 +135,9 @@ class ServiceAdmin extends Component {
         });
       } else {
         superagent
-          .post("http://localhost:8004/servicereq/report/")
+          .post(
+            "http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/"
+          )
           .set(
             "Authorization",
             `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`

@@ -35,7 +35,9 @@ class ListUsers extends Component {
 
   componentDidMount() {
     superagent
-      .get("http://localhost:8002/user")
+      .get(
+        "http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user"
+      )
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -61,7 +63,9 @@ class ListUsers extends Component {
     let searchUser = async (e) => {
       e.preventDefault();
       superagent
-        .get(`http://localhost:8002/user/${this.state.userId}`)
+        .get(
+          `http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user/${this.state.userId}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -85,7 +89,9 @@ class ListUsers extends Component {
     let update = async (e) => {
       e.preventDefault();
       superagent
-        .put("http://localhost:8002/user")
+        .put(
+          "http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`

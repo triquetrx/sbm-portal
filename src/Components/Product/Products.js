@@ -29,7 +29,9 @@ class Products extends Component {
   componentDidMount() {
     if (this.state.cookies.get("token")) {
       superagent
-        .get("http://localhost:8001/validate")
+        .get(
+          " http://sbmauthapp-env.eba-9pddynji.us-west-2.elasticbeanstalk.com/validate"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -60,7 +62,9 @@ class Products extends Component {
     let searchProduct = async (e) => {
       e.preventDefault();
       superagent
-        .get(`http://localhost:8003/product/${this.state.searchFor}`)
+        .get(
+          `http://sbm-products.us-west-2.elasticbeanstalk.com/product/${this.state.searchFor}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`

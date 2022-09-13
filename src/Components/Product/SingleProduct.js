@@ -44,7 +44,7 @@ export default function SignleProduct(props) {
   let serviceRequest = async (e) => {
     e.preventDefault();
     superagent
-      .post("http://localhost:8004/servicereq")
+      .post("http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq")
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(cookies.get("token"), "test")}`
@@ -66,7 +66,9 @@ export default function SignleProduct(props) {
   let updateItem = async (e) => {
     e.preventDefault();
     superagent
-      .put(`http://localhost:8003/product/${productDetails.id}`)
+      .put(
+        `http://sbm-products.us-west-2.elasticbeanstalk.com/product/${productDetails.id}`
+      )
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(cookies.get("token"), "test")}`
@@ -89,7 +91,9 @@ export default function SignleProduct(props) {
 
   let deleteItem = async () => {
     superagent
-      .delete(`http://localhost:8003/product/${productDetails.id}`)
+      .delete(
+        `http://sbm-products.us-west-2.elasticbeanstalk.com/product/${productDetails.id}`
+      )
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(cookies.get("token"), "test")}`

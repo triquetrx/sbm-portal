@@ -16,7 +16,7 @@ export default function AddProduct(props) {
   let uploadProduct = async (e) => {
     e.preventDefault();
     superagent
-      .post("http://localhost:8003/product")
+      .post("http://sbm-products.us-west-2.elasticbeanstalk.com/product")
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(cookies.get("token"), "test")}`

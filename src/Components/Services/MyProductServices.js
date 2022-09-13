@@ -46,7 +46,9 @@ class MyProductRequest extends Component {
   componentDidMount() {
     if (this.state.cookies.get("token")) {
       superagent
-        .get("http://localhost:8001/validate")
+        .get(
+          " http://sbmauthapp-env.eba-9pddynji.us-west-2.elasticbeanstalk.com/validate"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -61,7 +63,7 @@ class MyProductRequest extends Component {
           console.error(err.response.body);
         });
       superagent
-        .get("http://localhost:8004/servicereq")
+        .get("http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq")
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -101,7 +103,9 @@ class MyProductRequest extends Component {
         });
       } else {
         superagent
-          .get(`http://localhost:8003/product/${this.state.productId}`)
+          .get(
+            `http://sbm-products.us-west-2.elasticbeanstalk.com/product/${this.state.productId}`
+          )
           .set(
             "Authorization",
             `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -136,7 +140,9 @@ class MyProductRequest extends Component {
         });
       } else {
         superagent
-          .post("http://localhost:8004/servicereq/report/")
+          .post(
+            "http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/"
+          )
           .set(
             "Authorization",
             `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -515,7 +521,7 @@ class MyProductRequest extends Component {
                                 onClick={() => {
                                   superagent
                                     .get(
-                                      `http://localhost:8004/servicereq/report/requestId/${item.id}`
+                                      `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/requestId/${item.id}`
                                     )
                                     .set(
                                       "Authorization",

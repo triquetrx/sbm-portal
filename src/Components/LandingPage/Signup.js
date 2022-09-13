@@ -19,7 +19,9 @@ export default function Signup(second) {
       setAlertMessage("Please select your gender");
     } else {
       superagent
-        .post("http://localhost:8002/user")
+        .post(
+          "http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user"
+        )
         .send({
           name: userData.name,
           email: userData.email,

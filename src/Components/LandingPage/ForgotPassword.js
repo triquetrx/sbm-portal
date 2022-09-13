@@ -15,7 +15,9 @@ export default function ForgotPassword(props) {
     if (userData.confirmPassword.match(userData.newPassword)) {
       setAlert(false);
       superagent
-        .put("http://localhost:8001/forgot-password")
+        .put(
+          " http://sbmauthapp-env.eba-9pddynji.us-west-2.elasticbeanstalk.com/forgot-password"
+        )
         .send({
           email: userData.email,
           securityKey: userData.securityKey,

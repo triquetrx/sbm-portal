@@ -38,7 +38,9 @@ class AboutMe extends Component {
     if (this.state.cookies.get("token")) {
       this.setState({ isLoader: true });
       superagent
-        .get("http://localhost:8002/user/me")
+        .get(
+          "http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user/me"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -76,7 +78,9 @@ class AboutMe extends Component {
       e.preventDefault();
       this.setState({ isLoader: true });
       superagent
-        .put("http://localhost:8002/user")
+        .put(
+          "http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -108,7 +112,9 @@ class AboutMe extends Component {
       e.preventDefault();
       this.setState({ isLoader: true });
       superagent
-        .put("http://localhost:8001/change-password")
+        .put(
+          " http://sbmauthapp-env.eba-9pddynji.us-west-2.elasticbeanstalk.com/change-password"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`

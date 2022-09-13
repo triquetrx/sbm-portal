@@ -20,7 +20,9 @@ export default function Login(props) {
     e.preventDefault();
     setLoader(true);
     superagent
-      .post("http://localhost:8002/user/login")
+      .post(
+        "http://sbmusermanagement-env.eba-h2s2jmtn.us-west-2.elasticbeanstalk.com/user/login"
+      )
       .send({
         email: userData.email,
         password: userData.password,

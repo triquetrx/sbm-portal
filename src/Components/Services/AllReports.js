@@ -29,7 +29,9 @@ class AllReports extends Component {
   componentDidMount() {
     if (this.state.cookies.get("token")) {
       superagent
-        .get("http://localhost:8004/servicereq/report/")
+        .get(
+          "http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -50,7 +52,7 @@ class AllReports extends Component {
       e.preventDefault();
       superagent
         .get(
-          `http://localhost:8004/servicereq/report/userId/${this.state.searchFor}`
+          `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/userId/${this.state.searchFor}`
         )
         .set(
           "Authorization",
@@ -176,35 +178,39 @@ class AllReports extends Component {
           ))
         ) : (
           <>
-            {this.state.result.length > 0 ? (
-              this.state.result.map((item, key) => (
-                <Card className="mb-3" key={key}>
-                  <Card.Body>
-                    <Row>
-                      <Col>
-                        <Card.Title>Report ID: {item.id}</Card.Title>
-                        <Card.Subtitle>
-                          Request ID: {item.serviceReqId} <br />
-                          Dated: {new Date(item.reportDate).toDateString()}
-                        </Card.Subtitle>
-                      </Col>
-                      <div className="col-md-1 col-2">
-                        <button
-                          className="btn btn-md-block btn-outline-danger"
-                          onClick={() => {
-                            this.setState({
-                              reportData: item,
-                              openReport: true,
-                            });
-                          }}
-                        >
-                          <i className="fa-regular fa-envelope"></i>
-                        </button>
-                      </div>
-                    </Row>
-                  </Card.Body>
-                </Card>
-              ))
+            {this.state.result !== null ? (
+              this.state.result.length > 0 ? (
+                this.state.result.map((item, key) => (
+                  <Card className="mb-3" key={key}>
+                    <Card.Body>
+                      <Row>
+                        <Col>
+                          <Card.Title>Report ID: {item.id}</Card.Title>
+                          <Card.Subtitle>
+                            Request ID: {item.serviceReqId} <br />
+                            Dated: {new Date(item.reportDate).toDateString()}
+                          </Card.Subtitle>
+                        </Col>
+                        <div className="col-md-1 col-2">
+                          <button
+                            className="btn btn-md-block btn-outline-danger"
+                            onClick={() => {
+                              this.setState({
+                                reportData: item,
+                                openReport: true,
+                              });
+                            }}
+                          >
+                            <i className="fa-regular fa-envelope"></i>
+                          </button>
+                        </div>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                ))
+              ) : (
+                <></>
+              )
             ) : (
               <Container fluid>
                 <h6>No Data Found</h6>

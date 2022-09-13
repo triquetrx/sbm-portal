@@ -43,7 +43,9 @@ class AllProducts extends Component {
 
   componentDidMount() {
     superagent
-      .get("http://localhost:8001/validate/")
+      .get(
+        " http://sbmauthapp-env.eba-9pddynji.us-west-2.elasticbeanstalk.com/validate/"
+      )
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -58,7 +60,7 @@ class AllProducts extends Component {
         console.error(err);
       });
     superagent
-      .get("http://localhost:8003/product/")
+      .get("http://sbm-products.us-west-2.elasticbeanstalk.com/product/")
       .set(
         "Authorization",
         `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -113,7 +115,7 @@ class AllProducts extends Component {
     let serviceRequest = async (e) => {
       e.preventDefault();
       superagent
-        .post("http://localhost:8004/servicereq")
+        .post("http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq")
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -137,7 +139,9 @@ class AllProducts extends Component {
     let updateItem = async (e) => {
       e.preventDefault();
       superagent
-        .put(`http://localhost:8003/product/${this.state.productId}`)
+        .put(
+          `http://sbm-products.us-west-2.elasticbeanstalk.com/product/${this.state.productId}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -162,7 +166,9 @@ class AllProducts extends Component {
 
     let deleteItem = async () => {
       superagent
-        .delete(`http://localhost:8003/product/${this.state.productId}`)
+        .delete(
+          `http://sbm-products.us-west-2.elasticbeanstalk.com/product/${this.state.productId}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`

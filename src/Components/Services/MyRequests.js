@@ -37,7 +37,9 @@ class MyRequest extends Component {
   componentDidMount() {
     if (this.state.cookies.get("token")) {
       superagent
-        .get("http://localhost:8004/servicereq/my-requests")
+        .get(
+          "http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/my-requests"
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -63,7 +65,9 @@ class MyRequest extends Component {
     let serviceRequest = async (e) => {
       e.preventDefault();
       superagent
-        .put(`http://localhost:8004/servicereq/${this.state.editData.id}`)
+        .put(
+          `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/${this.state.editData.id}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -91,7 +95,9 @@ class MyRequest extends Component {
 
     let deleteItem = async () => {
       superagent
-        .delete(`http://localhost:8004/servicereq/${this.state.deleteId}`)
+        .delete(
+          `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/${this.state.deleteId}`
+        )
         .set(
           "Authorization",
           `Bearer ${AESDecrypt(this.state.cookies.get("token"), "test")}`
@@ -293,7 +299,7 @@ class MyRequest extends Component {
                               onClick={() => {
                                 superagent
                                   .get(
-                                    `http://localhost:8004/servicereq/report/requestId/${item.id}`
+                                    `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/requestId/${item.id}`
                                   )
                                   .set(
                                     "Authorization",
@@ -395,7 +401,7 @@ class MyRequest extends Component {
                             onClick={() => {
                               superagent
                                 .get(
-                                  `http://localhost:8004/servicereq/report/requestId/${item.id}`
+                                  `http://sbm-service.us-west-2.elasticbeanstalk.com/servicereq/report/requestId/${item.id}`
                                 )
                                 .set(
                                   "Authorization",
